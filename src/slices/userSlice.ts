@@ -15,7 +15,7 @@ export const userSlice = createSlice({
   reducers: {
     recipeChanged: (state, action: PayloadAction<string>) => {
       const recipeId = action.payload;
-      state.selectedRecipe = recipeId;
+      return { ...state, selectedRecipe: recipeId };
     }
   },
 });
