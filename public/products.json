@@ -1,0 +1,496 @@
+{
+    "rawMaterials": [
+        { "id" : "iron-ore", "name": "Iron ore" },
+        { "id" : "copper-ore", "name": "Copper ore" },
+        { "id" : "silicon-ore", "name": "Silicon ore" },
+        { "id" : "titanium-ore", "name": "Titanium ore"},
+        { "id" : "coal", "name": "Coal" },
+        { "id" : "refined-oil", "name": "Refined oil" },
+        { "id" : "hydrogen", "name": "Hydrogen" },
+        { "id" : "stone", "name": "Stone" },
+        { "id" : "water", "name": "Water" }
+    ],
+    "recipes": [
+        {
+            "id": "iron-plate",
+            "name": "Iron plate",
+            "output": 1,
+            "time": 1,
+            "inputs": [
+                {
+                    "id": "iron-ore",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "iron-ring",
+            "name": "Iron ring",
+            "output": 1,
+            "time": 1.5,
+            "inputs": [
+                {
+                    "id": "iron-ore",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "copper-plate",
+            "name": "Copper plate",
+            "output": 1,
+            "time": 1,
+            "inputs": [
+                {
+                    "id": "copper-ore",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "silicon-plate",
+            "name": "High-purity silicon",
+            "output": 1,
+            "time": 2,
+            "inputs": [
+                {
+                    "id": "silicon-ore",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
+            "id": "titanium-ingot",
+            "name": "Titanium Ingot",
+            "output": 1,
+            "time": 2,
+            "inputs": [
+                {
+                    "id": "titanium-ore",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
+            "id": "titanium-alloy",
+            "name": "Titanium Alloy",
+            "output": 4,
+            "time": 12,
+            "inputs": [
+                {
+                    "id": "titanium-ingot",
+                    "quantity": 4
+                },
+                {
+                    "id": "steel",
+                    "quantity": 4
+                },
+                {
+                    "id": "sulphuric-acid",
+                    "quantity": 8
+                }
+            ]
+        },
+        {
+            "id": "gear",
+            "name": "Gear",
+            "output": 1,
+            "time": 1,
+            "inputs": [
+                {
+                    "id": "iron-plate",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "coil",
+            "name": "Coil",
+            "output": 2,
+            "time": 1,
+            "inputs": [
+                {
+                    "id": "copper-plate",
+                    "quantity": 1
+                },
+                {
+                    "id": "iron-ring",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
+            "id": "logistics-drone",
+            "name": "Logistics Drone",
+            "output": 1,
+            "time": 4,
+            "inputs": [
+                {
+                    "id": "iron-plate",
+                    "quantity": 5
+                },
+                {
+                    "id": "processor",
+                    "quantity": 2
+                },
+                {
+                    "id": "thruster-1",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
+            "id": "logistics-vessel",
+            "name": "Logistics Vessel",
+            "output": 1,
+            "time": 6,
+            "inputs": [
+                {
+                    "id": "titanium-alloy",
+                    "quantity": 10
+                },
+                {
+                    "id": "processor",
+                    "quantity": 10
+                },
+                {
+                    "id": "thruster-2",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
+            "id": "processor",
+            "name": "Processor",
+            "output": 1,
+            "time": 3,
+            "inputs": [
+                {
+                    "id": "circuit-board",
+                    "quantity": 2
+                },
+                {
+                    "id": "microcrystal",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
+            "id": "circuit-board",
+            "name": "Circuit Board",
+            "output": 2,
+            "time": 1,
+            "inputs": [
+                {
+                    "id": "iron-plate",
+                    "quantity": 2
+                },
+                {
+                    "id": "copper-plate",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "microcrystal",
+            "name": "Microcrystalline components",
+            "output": 1,
+            "time": 2,
+            "inputs": [
+                {
+                    "id": "silicon-plate",
+                    "quantity": 2
+                },
+                {
+                    "id": "copper-plate",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "steel",
+            "name": "Steel",
+            "output": 1,
+            "time": 3,
+            "inputs": [
+                {
+                    "id": "iron-plate",
+                    "quantity": 3
+                }
+            ]
+        },
+        {
+            "id": "thruster-1",
+            "name": "Thruster",
+            "output": 1,
+            "time": 4,
+            "inputs": [
+                {
+                    "id": "steel",
+                    "quantity": 2
+                },
+                {
+                    "id": "copper-plate",
+                    "quantity": 3
+                }
+            ]
+        },
+        {
+            "id": "thruster-2",
+            "name": "Reinforced Thruster",
+            "output": 1,
+            "time": 6,
+            "inputs": [
+                {
+                    "id": "titanium-alloy",
+                    "quantity": 5
+                },
+                {
+                    "id": "motor-2",
+                    "quantity": 5
+                }
+            ]
+        },
+        {
+            "id": "motor-1",
+            "name": "Electric motor",
+            "output": 1,
+            "time": 2,
+            "inputs": [
+                {
+                    "id": "iron-plate",
+                    "quantity": 2
+                },
+                {
+                    "id": "gear",
+                    "quantity": 1
+                },
+                {
+                    "id": "coil",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "motor-2",
+            "name": "Electromagnetic turbine",
+            "output": 1,
+            "time": 2,
+            "inputs": [
+                {
+                    "id": "motor-1",
+                    "quantity": 2
+                },
+                {
+                    "id": "coil",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
+            "id": "motor-3",
+            "name": "Supermagnetic ring",
+            "output": 1,
+            "time": 3,
+            "inputs": [
+                {
+                    "id": "motor-2",
+                    "quantity": 2
+                },
+                {
+                    "id": "iron-ring",
+                    "quantity": 3
+                },
+                {
+                    "id": "graphite",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "graphite",
+            "name": "Energetic graphite",
+            "output": 1,
+            "time": 2,
+            "inputs": [
+                {
+                    "id": "coal",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
+            "id": "particle-container",
+            "name": "Particle container",
+            "output": 1,
+            "time": 4,
+            "inputs": [
+                {
+                    "id": "motor-2",
+                    "quantity": 2
+                },
+                {
+                    "id": "copper-plate",
+                    "quantity": 2
+                },
+                {
+                    "id": "graphene",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
+            "id": "sulphuric-acid",
+            "name": "Sulphuric acid",
+            "output": 4,
+            "time": 6,
+            "inputs": [
+                {
+                    "id": "refined-oil",
+                    "quantity": 6
+                },
+                {
+                    "id": "stone",
+                    "quantity": 8
+                },
+                {
+                    "id": "water",
+                    "quantity": 4
+                }
+            ]
+        },
+        {
+            "id": "graphene",
+            "name": "Graphene",
+            "output": 2,
+            "time": 3,
+            "inputs": [
+                {
+                    "id": "graphite",
+                    "quantity": 3
+                },
+                {
+                    "id": "sulphuric-acid",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "plastic",
+            "name": "Plastic",
+            "output": 1,
+            "time": 3,
+            "inputs": [
+                {
+                    "id": "refined-oil",
+                    "quantity": 2
+                },
+                {
+                    "id": "graphite",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "belt-1",
+            "name": "Conveyor Belt Mk.1",
+            "output": 3,
+            "time": 1,
+            "inputs": [
+                {
+                    "id": "iron-plate",
+                    "quantity": 2
+                },
+                {
+                    "id": "gear",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "belt-2",
+            "name": "Conveyor Belt Mk.2",
+            "output": 3,
+            "time": 1,
+            "inputs": [
+                {
+                    "id": "belt-1",
+                    "quantity": 3
+                },
+                {
+                    "id": "motor-2",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "belt-3",
+            "name": "Conveyor Belt Mk.3",
+            "output": 3,
+            "time": 1,
+            "inputs": [
+                {
+                    "id": "belt-2",
+                    "quantity": 3
+                },
+                {
+                    "id": "motor-3",
+                    "quantity": 1
+                },
+                {
+                    "id": "graphene",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "sorter-1",
+            "name": "Sorter Mk.1",
+            "output": 1,
+            "time": 1,
+            "inputs": [
+                {
+                    "id": "iron-plate",
+                    "quantity": 3
+                },
+                {
+                    "id": "circuit-board",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "sorter-2",
+            "name": "Sorter Mk.2",
+            "output": 2,
+            "time": 1,
+            "inputs": [
+                {
+                    "id": "sorter-1",
+                    "quantity": 2
+                },
+                {
+                    "id": "motor-1",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": "sorter-3",
+            "name": "Sorter Mk.3",
+            "output": 2,
+            "time": 1,
+            "inputs": [
+                {
+                    "id": "sorter-2",
+                    "quantity": 2
+                },
+                {
+                    "id": "motor-2",
+                    "quantity": 1
+                }
+            ]
+        }
+
+    ]
+}
