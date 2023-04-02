@@ -1,13 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 
-export interface CounterState {
+
+const savedRecipeStorageKey = 'saved-recipe';
+
+export interface UserState {
   selectedRecipe: string;
 }
 
-const initialState: CounterState = {
-  selectedRecipe: '',
+const savedRecipe = localStorage.getItem(savedRecipeStorageKey);
+
+const initialState: UserState = {
+  selectedRecipe: savedRecipe ? savedRecipe : '',
 };
+
+
 
 export const userSlice = createSlice({
   name: 'user',
@@ -15,6 +22,14 @@ export const userSlice = createSlice({
   reducers: {
     recipeChanged: (state, action: PayloadAction<string>) => {
       const recipeId = action.payload;
+
+      try {
+        localStorage.setItem(savedRecipeStorageKey, recipeId);
+      }
+      catch(e) {
+        console.error(`Failed to save recipeId to local storage: ${e}`);
+      }
+
       return { ...state, selectedRecipe: recipeId };
     }
   },

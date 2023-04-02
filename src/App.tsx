@@ -3,33 +3,37 @@ import { useEffect, useState } from 'react';
 import { FactoryDetails } from './components/factory/factoryDetails';
 import { RecipeSelector } from './components/recipe/recipeSelector';
 import { calculateFactoryRequirements, FactoryRequirement } from './models/factory';
-import { loadAllRecipes, Recipe, RawMaterial } from './models/recipe';
+import { loadAllRecipes, Recipe } from './models/recipe';
+import { useAppDispatch, useAppSelector } from './app/hooks';
+import { selectSavedRecipe, recipeChanged } from './slices/userSlice';
+import { rawMaterialsLoaded, recipesLoaded, selectAllRecipes, selectRecipe } from './slices/recipeSlice';
 
 function App() {
 
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [rawMaterials, setRawMaterials] = useState<RawMaterial[]>([]);
-  const [selectedRecipe, setSelectedRecipe] = useState<Recipe>();
   const [assemblerCount, setAssemblerCount] = useState(1);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
 
     const loadGameData = async () => {
       const [raw, rec] = await loadAllRecipes();
 
-      setRecipes(rec);
-      setRawMaterials(raw);
-      setSelectedRecipe(rec[0]);
+      dispatch(recipesLoaded(rec));
+      dispatch(rawMaterialsLoaded(raw));
     };
+
 
     loadGameData();
   }, []);
 
-  if (rawMaterials.length > 0) {
-    console.debug(`Found raw materials: ${rawMaterials.join(',')}`);
-  }
-
   let error: string | undefined = undefined;
+
+  const recipes = useAppSelector(selectAllRecipes);
+  const selectedRecipeId = useAppSelector(selectSavedRecipe);
+  const selectedRecipe = useAppSelector(selectRecipe(selectedRecipeId));
+
+  let factory: FactoryRequirement | undefined;
 
   if (selectedRecipe) {
     const invalidInputs = selectedRecipe.inputs.filter(input => !input.type);
@@ -37,14 +41,19 @@ function App() {
     if (invalidInputs.length > 0) {
       error = `Unable to find the following inputs: ${invalidInputs.map(input => input.name).join(', ')}`;
     }
+    factory = selectedRecipe ? calculateFactoryRequirements(recipes, selectedRecipe, assemblerCount * selectedRecipe.output * selectedRecipe.time) : undefined;
   }
 
-  const factory: FactoryRequirement | undefined = selectedRecipe ? calculateFactoryRequirements(recipes, selectedRecipe, assemblerCount * selectedRecipe.output * selectedRecipe.time) : undefined;
+  const handleRecipeChange = (selected: Recipe) => {
+    console.log('in change handler...');
+    dispatch(recipeChanged(selected.id));
+  };
 
-  if (recipes && recipes.length > 0 && selectedRecipe) {
+
+  if (recipes && recipes.length > 0) {
     return (
       <Box sx={{ m: 3 }}>
-        <RecipeSelector recipes={recipes} selectedRecipe={selectedRecipe} onSelection={selected => setSelectedRecipe(selected)} />
+        <RecipeSelector recipes={recipes} selectedRecipeId={selectedRecipeId} onSelection={handleRecipeChange} />
         <Box>
           <InputLabel htmlFor="assembler-count">Assemblers:</InputLabel>
           <Slider
