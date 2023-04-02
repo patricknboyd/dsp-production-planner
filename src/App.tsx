@@ -25,12 +25,16 @@ function App() {
     loadGameData();
   }, []);
 
+  if (rawMaterials.length > 0) {
+    console.debug(`Found raw materials: ${rawMaterials.join(',')}`);
+  }
+
   let error: string | undefined = undefined;
 
-  if(selectedRecipe) {
+  if (selectedRecipe) {
     const invalidInputs = selectedRecipe.inputs.filter(input => !input.type);
 
-    if(invalidInputs.length > 0) {
+    if (invalidInputs.length > 0) {
       error = `Unable to find the following inputs: ${invalidInputs.map(input => input.name).join(', ')}`;
     }
   }
@@ -55,7 +59,7 @@ function App() {
             max={10}
             onChange={(_, value) => setAssemblerCount(Array.isArray(value) ? value[0] : value)} />
         </Box>
-        {error && <Typography sx={{color: 'red'}}>{error}</Typography>}
+        {error && <Typography sx={{ color: 'red' }}>{error}</Typography>}
         {!error && factory && selectedRecipe && <FactoryDetails assemblerCount={assemblerCount} factory={factory} recipe={selectedRecipe} />}
       </Box>
     );
