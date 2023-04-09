@@ -1,12 +1,11 @@
 import { Box, InputLabel, Slider, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FactoryDetails } from './components/factory/factoryDetails';
 import { RecipeSelector } from './components/recipe/recipeSelector';
 import { calculateFactoryRequirements, FactoryRequirement } from './models/factory';
-import { loadAllRecipes, Recipe } from './models/recipe';
+import { Recipe, recipes } from './models/recipe';
 import { useAppDispatch, useAppSelector } from './app/hooks';
 import { selectSavedRecipe, recipeChanged } from './slices/userSlice';
-import { rawMaterialsLoaded, recipesLoaded, selectAllRecipes, selectRecipe } from './slices/recipeSlice';
 
 function App() {
 
@@ -14,24 +13,10 @@ function App() {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-
-    const loadGameData = async () => {
-      const [raw, rec] = await loadAllRecipes();
-
-      dispatch(recipesLoaded(rec));
-      dispatch(rawMaterialsLoaded(raw));
-    };
-
-
-    loadGameData();
-  }, []);
-
   let error: string | undefined = undefined;
 
-  const recipes = useAppSelector(selectAllRecipes);
   const selectedRecipeId = useAppSelector(selectSavedRecipe);
-  const selectedRecipe = useAppSelector(selectRecipe(selectedRecipeId));
+  const selectedRecipe = recipes.find(r => r.id === selectedRecipeId);
 
   let factory: FactoryRequirement | undefined;
 
@@ -50,32 +35,27 @@ function App() {
   };
 
 
-  if (recipes && recipes.length > 0) {
-    return (
-      <Box sx={{ m: 3 }}>
-        <RecipeSelector recipes={recipes} selectedRecipeId={selectedRecipeId} onSelection={handleRecipeChange} />
-        <Box>
-          <InputLabel htmlFor="assembler-count">Assemblers:</InputLabel>
-          <Slider
-            id="assembler-count"
-            valueLabelDisplay='auto'
-            getAriaValueText={(value: number) => value.toString()}
-            sx={{ width: 300, ml: 2 }}
-            value={assemblerCount}
-            step={1}
-            marks
-            min={1}
-            max={10}
-            onChange={(_, value) => setAssemblerCount(Array.isArray(value) ? value[0] : value)} />
-        </Box>
-        {error && <Typography sx={{ color: 'red' }}>{error}</Typography>}
-        {!error && factory && selectedRecipe && <FactoryDetails assemblerCount={assemblerCount} factory={factory} recipe={selectedRecipe} />}
+  return (
+    <Box sx={{ m: 3 }}>
+      <RecipeSelector recipes={recipes} selectedRecipeId={selectedRecipeId} onSelection={handleRecipeChange} />
+      <Box>
+        <InputLabel htmlFor="assembler-count">Assemblers:</InputLabel>
+        <Slider
+          id="assembler-count"
+          valueLabelDisplay='auto'
+          getAriaValueText={(value: number) => value.toString()}
+          sx={{ width: 300, ml: 2 }}
+          value={assemblerCount}
+          step={1}
+          marks
+          min={1}
+          max={10}
+          onChange={(_, value) => setAssemblerCount(Array.isArray(value) ? value[0] : value)} />
       </Box>
-    );
-  }
-  else {
-    return <Typography>Loading...</Typography>;
-  }
+      {error && <Typography sx={{ color: 'red' }}>{error}</Typography>}
+      {!error && factory && selectedRecipe && <FactoryDetails assemblerCount={assemblerCount} factory={factory} recipe={selectedRecipe} />}
+    </Box>
+  );
 }
 
 export { App };
