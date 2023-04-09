@@ -3,13 +3,13 @@ import { Recipe } from '../../models/recipe';
 
 type RecipeSelectorProps = {
     recipes: Recipe[],
-    selectedRecipe: Recipe,
+    selectedRecipeId: string,
     onSelection(selected: Recipe): void;
 }
 
 const RecipeSelector = (props: RecipeSelectorProps) => {
 
-  const { recipes, selectedRecipe } = props;
+  const { recipes, selectedRecipeId } = props;
 
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value;
@@ -30,9 +30,10 @@ const RecipeSelector = (props: RecipeSelectorProps) => {
     <>
       <InputLabel id="recipe-selector-label">Select a Recipe</InputLabel>
       <Select
+        sx={{minWidth: 200 }}
         labelId="recipe-selector-label"
         id="recipe-selector"
-        value={selectedRecipe.id}
+        value={selectedRecipeId}
         onChange={handleChange}>
         {recipeItems}
       </Select>
