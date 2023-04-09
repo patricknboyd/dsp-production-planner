@@ -15,7 +15,7 @@ function App() {
 
   let error: string | undefined = undefined;
 
-  const selectedRecipeId = useAppSelector(selectSavedRecipe);
+  const selectedRecipeId = useAppSelector(selectSavedRecipe) || recipes[0].id;
   const selectedRecipe = recipes.find(r => r.id === selectedRecipeId);
 
   let factory: FactoryRequirement | undefined;
@@ -27,6 +27,9 @@ function App() {
       error = `Unable to find the following inputs: ${invalidInputs.map(input => input.name).join(', ')}`;
     }
     factory = selectedRecipe ? calculateFactoryRequirements(recipes, selectedRecipe, assemblerCount * selectedRecipe.output * selectedRecipe.time) : undefined;
+  }
+  else {
+    console.error('Unable to find a selected recipe!');
   }
 
   const handleRecipeChange = (selected: Recipe) => {
